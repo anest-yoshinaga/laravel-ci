@@ -56,6 +56,7 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'white_ips' => env('WHITE_IPS', false),
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
