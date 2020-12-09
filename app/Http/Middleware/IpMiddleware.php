@@ -16,16 +16,16 @@ class IpMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $white_ip = env("WHITE_IPS", false);
+        $white_ip = config("app.white_ips");
         //設定されている場合はチェックする
-        if ($white_ip) {
+        if ($white_ip !== false) {
             $ips = explode(",", $white_ip);
             foreach ($ips as $ip) {
                 if ($ip == $request->ip()) {
                     return $next($request);
                 }
             }
-            abort(403);
+            abort(403, $request->ip());
         } else {
             return $next($request);
         }
